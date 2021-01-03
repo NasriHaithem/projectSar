@@ -1,0 +1,5 @@
+java -Djava.security.policy=server.policy -Djava.rmi.server.codebase=file:///C:/Users/haithem/Desktop/newSarProject/projectSar/server DynamicServer
+
+
+
+java -Djava.security.policy=client.policy -Djava.rmi.server.codebase=file:///C:/Users/haithem/Desktop/newSarProject/projectSar/client DynamicClient
