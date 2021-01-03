@@ -15,7 +15,7 @@ public class Matrix  implements Serializable{
                 throw new Exception();
             }
         }catch(Exception e){
-            System.out.println("row or col more than 10");
+            System.out.println("row or col more than 100");
         }
 
     }
@@ -50,7 +50,7 @@ public class Matrix  implements Serializable{
         for(int i=0;i<m1.rowLength;i++){
             for(int j=0;j<m2.colLength;j++){
                 c.data[i][j]=0;
-                for(int k=0;k<m2.colLength;k++){
+                for(int k=0;k<m1.colLength;k++){
                     c.data[i][j]+=m1.data[i][k]*m2.data[k][j];
                 }
             }
@@ -71,7 +71,8 @@ public class Matrix  implements Serializable{
     static public Matrix[] decomposer(Matrix m) {
         int x=m.rowLength/2;
         int y=m.colLength/2;
-
+        int oddOrEvenRows = m.rowLength%2;
+        int oddOrEvenCols = m.colLength%2;
         Matrix m1=new Matrix(x,y);//3 2
         Matrix m2=new Matrix(x,m.colLength-y);//3 3
         Matrix m3=new Matrix(m.rowLength-x,y);//3 2
@@ -85,17 +86,17 @@ public class Matrix  implements Serializable{
         for(int i=0;i<m2.rowLength;i++){
             for(int j=0;j<m.colLength;j++) {
 
-                m2.data[i][j] = m.data[i][j+m2.colLength-1];
+                m2.data[i][j] = m.data[i][j+m2.colLength-oddOrEvenCols];
             }
         }
         for(int i=0;i<m3.rowLength;i++){
             for(int j=0;j<m3.colLength;j++) {
-                m3.data[i][j] = m.data[i+m3.rowLength][j];
+                m3.data[i][j] = m.data[i+m3.rowLength-oddOrEvenRows][j];
             }
         }
         for(int i=0;i<m4.rowLength;i++){
             for(int j=0;j<m4.colLength;j++) {
-                m4.data[i][j] = m.data[i+m4.rowLength][j+m2.colLength-1];
+                m4.data[i][j] = m.data[i+m4.rowLength-oddOrEvenRows][j+m4.colLength-oddOrEvenCols];
             }
         }
 
