@@ -18,27 +18,25 @@ public class Client {
             Registry reg = LocateRegistry.getRegistry("localhost",1099);
             FabInterface fabrique = (FabInterface) reg.lookup("Fabrique");
 
-            //generating les 2 matrices:
-            Matrix m1 = new Matrix(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
-            Matrix m2 = new Matrix(Integer.parseInt(args[2]),Integer.parseInt(args[3]));
+            //instanciation des matrices:
+		    Matrix m1 = new Matrix(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
+		    Matrix m2 = new Matrix(Integer.parseInt(args[2]),Integer.parseInt(args[3]));
+
+	    //generation de matrice
 		m1.generateMatrix();
 		m2.generateMatrix();
+		System.out.println("Matrice 1 : ");
 		m1.viewMatrix();
 		System.out.println();
+		
+		System.out.println("Matrice 2 : ");
+		m2.viewMatrix();
+		System.out.println();
+
             //decomposition:
-            Matrix tab1[] = Matrix.decomposer(m1);
-            Matrix tab2[] = Matrix.decomposer(m2);
-            tab1[0].viewMatrix();
-            System.out.println();
+		    Matrix tab1[] = Matrix.decomposer(m1);
+		    Matrix tab2[] = Matrix.decomposer(m2);
 
-            tab1[1].viewMatrix();
-            System.out.println();
-
-            tab1[2].viewMatrix();
-            System.out.println();
-
-            tab1[3].viewMatrix();
-            System.out.println();
 
 
 
@@ -58,8 +56,9 @@ public class Client {
             obj4= (ObjectInterface)fabrique.newObject();
             Matrix result4 = obj4.matrixBlocResult(tab1[2], tab2[1], tab1[3], tab2[3]);
 
-
+		
             Matrix finalResult = Matrix.composer(result1, result2, result3, result4);
+	    System.out.println("Matrice resultat : ");
             finalResult.viewMatrix();
         }
         catch (Exception e) {
